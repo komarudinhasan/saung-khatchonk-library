@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perpustakaan Digital SAUNG KHATCHONK</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Navigation Bar -->
+  <header class="bg-emerald-saung text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="router.navigate('home')">
+        <div class="w-10 h-10 rounded-full bg-white text-emerald-saung flex items-center justify-center font-bold text-xl shadow">SK</div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight">SAUNG KHATCHONK</h1>
+          <p class="text-xs text-emerald-200">Perpustakaan Digital Terpadu</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <button onclick="router.navigate('home')" class="hover:text-emerald-200 transition">Beranda</button>
+        <button onclick="router.navigate('catalog')" class="hover:text-emerald-200 transition">Katalog</button>
+        <button onclick="router.navigate('search')" class="hover:text-emerald-200 transition">Pencarian</button>
+        <div id="authNavContainer" class="flex items-center space-x-4">
+          <!-- Dinamis diisi berdasarkan status login -->
+        </div>
+      </nav>
+      <div class="flex items-center md:hidden">
+        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-emerald-800 focus:outline-none">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-emerald-900 border-t border-emerald-800 px-4 pt-2 pb-4 space-y-2">
+      <button onclick="router.navigate('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800">Beranda</button>
+      <button onclick="router.navigate('catalog'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800">Katalog</button>
+      <button onclick="router.navigate('search'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded hover:bg-emerald-800">Pencarian</button>
+      <div id="mobileAuthContainer" class="pt-2 border-t border-emerald-800"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main id="app" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <!-- Konten Dinamis Dimuat Disini -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">SK</div>
+        <span class="text-white font-semibold">Perpustakaan Digital SAUNG KHATCHONK</span>
+      </div>
+      <p class="text-xs text-center md:text-left">&copy; 2026 Saung Khatchonk. Sistem Arsip Digital Terpadu & Layanan Perpustakaan Pintar.</p>
+      <div class="flex space-x-4 text-xs">
+        <span class="text-emerald-400 font-medium">Status: Online / Offline Ready</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal / Notification Container -->
+  <div id="modalContainer"></div>
+
+  <!-- Script Utama -->
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+      });
+    }
+  </script>
+</body>
+</html>
