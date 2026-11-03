@@ -5,8 +5,7 @@
 
 // Konfigurasi API Backend Google Apps Script (Ganti URL setelah deploy Web App Apps Script)
 const CONFIG = {
-  API_URL: localStorage.getItem('SK_API_URL') || 'https://script.google.com/macros/s/AKfycbz.../exec',
-  APP_NAME: 'Perpustakaan Digital SAUNG KHATCHONK'
+  API_URL: localStorage.getItem('SK_API_URL') || 'https://script.google.com/macros/s/AKfycbwNEbqR4DYs_D-AY1bx2JVNiCClWX_GruA2MXjfN9a0nKAuUNo7qZPFBQhojUqIksWArg/exec'
 };
 
 // State Aplikasi
